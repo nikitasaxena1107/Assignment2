@@ -1,0 +1,65 @@
+<div>
+    <div class="form-inline col-md-12">
+        <label for="" class="text-left col-md-2">NBFC</label>
+        <span class="col-md-1"></span>
+
+        <label for="" class="col-md-2 text-md-left">Systemically non important/important</label>
+        <span class="col-md-1"></span>
+
+        <label for="" class="col-md-2 text-md-left">Deposit Category</label>
+        <span class="col-md-1"></span>
+
+        <label for="" class="col-md-2 text-md-left">Sub-list</label>
+        <span class="col-md-1"></span>
+    
+
+        <select style=" scroll-behavior: auto; " class="form-control col-md-2 " 
+            (change)='onFilterCall($event, "NBFC")'
+            [(ngModel)]="selectedNBFC">
+            <option disabled  selected> {{defaultSelectedValue}} </option>
+            <option *ngFor = "let row of rows | unique:'NBFC' ">{{row.NBFC}}</option>
+        </select>
+        <div class="col-md-1"></div>
+        
+        <select style=" scroll-behavior: auto; " class="form-control col-md-2 " 
+            (change)='onFilterCall($event, "sysImp_NotImp")'
+            [(ngModel)]="selectedSysImp_NotImp">
+            <option disabled  selected> {{defaultSelectedValue}} </option>
+            <option *ngFor = "let row of rows | unique:'sysImp_NotImp'">{{row.sysImp_NotImp}}</option>
+        </select>
+        <div class="col-md-1"></div>
+
+        <select style=" scroll-behavior: auto; " class="form-control col-md-2 "
+            (change)='onFilterCall($event, "depositCat")'
+            [(ngModel)]="selectedDepositCat">
+            <option disabled  selected> {{defaultSelectedValue}} </option>
+            <option *ngFor = "let row of rows | unique:'depositCat'">{{row.depositCat}}</option>
+        </select>
+        <div class="col-md-1"></div>
+
+        <select style=" scroll-behavior: auto; " class="form-control col-md-2 "
+            (change)='onFilterCall($event, "subList")'
+            [(ngModel)]="selectedSubList">
+            <option disabled  selected> {{defaultSelectedValue}} </option>
+            <option *ngFor = "let row of rows | unique:'subList'">{{row.subList}}</option>
+        </select>
+        <div class="col-md-1"></div>
+    </div>
+    <hr>
+    <button type="button" class="btn btn-info" (click)= onClear()>Clear</button>
+    <br>
+    <br>
+    <ngx-datatable
+        #table
+        class="material fullscreen"
+        item-width="auto"
+        [headerHeight]="50"
+        [limit]="5"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [rows]="rows">
+        >
+    </ngx-datatable>
+</div>
